@@ -14,10 +14,12 @@
         text-align: left;
     }
 </style>
-<input type="text" id="inputText" placeholder="输入文案">
-<button onclick="generateQRCode()">生成二维码</button>
-<button onclick="clearText()">清除链接</button>
-<div id="qrcode"></div>
+<div class="container">
+    <input type="text" id="inputText" placeholder="输入文案">
+    <button onclick="generateQRCode()">生成二维码</button>
+    <button onclick="clearText()">清除链接</button>
+    <div id="qrcode"></div>
+</div>
 <script type="text/JavaScript">
     function generateQRCode() {
         var inputText = document.getElementById('inputText').value;
