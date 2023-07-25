@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>生成二维码</title>
+</head>
+<script src="qrcode.js"></script>
+<style>
+    body {
+        text-align: center;
+    }
+    .container {
+        display: inline-block;
+        text-align: left;
+    }
+</style>
+<input type="text" id="inputText" placeholder="输入文案">
+<button onclick="generateQRCode()">生成二维码</button>
+<button onclick="clearText()">清除链接</button>
+<div id="qrcode"></div>
+<script type="text/JavaScript">
+    function generateQRCode() {
+        var inputText = document.getElementById('inputText').value;
+        var extractedURL = extractURLFromText(inputText);
+        if (extractedURL) {
+            var qrcodeDiv = document.getElementById('qrcode');
+            qrcodeDiv.innerHTML = ''; // 清空之前的二维码
+            var qrcode = new QRCode(qrcodeDiv, {
+                text: extractedURL,
+                width: 200,
+                height: 200
+            });
+        }
+    }
+
+    function clearText() {
+        document.getElementById('inputText').value = '';
+        document.getElementById('qrcode').innerHTML = '';
+    }
+
+    function extractURLFromText(text) {
+        var regExp = /(https?:\/\/\S+)/;
+        var matches = text.match(regExp);
+        if (matches && matches.length > 1) {
+            return matches[1];
+        } else {
+            alert("文案中没有找到URL链接，请输入包含URL链接的文案。");
+            return null;
+        }
+    }
+</script>
+</body>
+</html>
